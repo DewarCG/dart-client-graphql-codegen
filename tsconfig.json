@@ -3,9 +3,13 @@
     "sourceMap": true,
     "outDir": "dist",
     "strict": false,
+    "rootDir": "src",
     "lib": [
       "esnext"
     ],
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+  },
+  "exclude": [
+    "tests"
+  ]
 }

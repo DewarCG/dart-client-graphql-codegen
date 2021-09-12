@@ -1,6 +1,6 @@
 {
   "name": "dart-client-graphql-codegen",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "GraphQL Code Generator plugin for generating Dart types",
   "license": "MIT",
   "scripts": {
