@@ -26,7 +26,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.DartModelVisitor = void 0;
 var visitor_plugin_common_1 = require("@graphql-codegen/visitor-plugin-common");
 var auto_bind_1 = __importDefault(require("auto-bind"));
@@ -36,7 +36,7 @@ var DartModelVisitor = /** @class */ (function (_super) {
     function DartModelVisitor(schema, pluginConfig, additionalConfig) {
         if (additionalConfig === void 0) { additionalConfig = {}; }
         var _this = _super.call(this, schema, pluginConfig, {}) || this;
-        (0, auto_bind_1["default"])(_this);
+        (0, auto_bind_1.default)(_this);
         return _this;
     }
     DartModelVisitor.prototype.NonNullType = function (node) {

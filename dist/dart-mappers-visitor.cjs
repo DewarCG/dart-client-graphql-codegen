@@ -26,7 +26,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.DartMappersVisitor = void 0;
 var visitor_plugin_common_1 = require("@graphql-codegen/visitor-plugin-common");
 var auto_bind_1 = __importDefault(require("auto-bind"));
@@ -36,7 +36,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
     function DartMappersVisitor(schema, pluginConfig, additionalConfig) {
         if (additionalConfig === void 0) { additionalConfig = {}; }
         var _this = _super.call(this, schema, pluginConfig, {}) || this;
-        (0, auto_bind_1["default"])(_this);
+        (0, auto_bind_1.default)(_this);
         return _this;
     }
     DartMappersVisitor.prototype.NonNullType = function (node) {
@@ -47,7 +47,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
         return {
             result: result,
             mapper: type.mapper,
-            isObjectList: type.isObjectList
+            isObjectList: type.isObjectList,
         };
     };
     DartMappersVisitor.prototype.NamedType = function (node) {
@@ -58,7 +58,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
         if (!this.isDartPrimitive(type)) {
             mapper = {
                 fromMap: ["final {{field}} = " + type + "Mapper().fromMap({{parameter}});"],
-                toMap: ["final {{field}} = " + type + "Mapper().toMap({{parameter}});"]
+                toMap: ["final {{field}} = " + type + "Mapper().toMap({{parameter}});"],
             };
             nullMapper = {
                 toMap: [
@@ -72,7 +72,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
                     "if (map['{{field}}'] != null) {",
                     (0, visitor_plugin_common_1.indent)("{{field}} = " + type + "Mapper().fromMap(map['{{field}}']);"),
                     "}",
-                ]
+                ],
             };
             isObject = true;
         }
@@ -81,7 +81,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
             result: type,
             mapper: mapper,
             nullMapper: nullMapper,
-            isObject: isObject
+            isObject: isObject,
         };
     };
     DartMappersVisitor.prototype.ListType = function (node, key, parent) {
@@ -97,7 +97,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
             var mapOptional = typeName.includes('?') ? '?' : '';
             mapper = {
                 fromMap: ["final " + common],
-                toMap: ["final " + common2]
+                toMap: ["final " + common2],
             };
             nullMapper = {
                 fromMap: [
@@ -111,7 +111,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
                     'if (input.{{field}} != null) {',
                     (0, visitor_plugin_common_1.indent)(common2),
                     '}',
-                ]
+                ],
             };
             isObjectList = true;
         }
@@ -119,7 +119,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
             result: typeName,
             mapper: mapper,
             nullMapper: nullMapper,
-            isObjectList: isObjectList
+            isObjectList: isObjectList,
         };
     };
     DartMappersVisitor.prototype.ObjectTypeDefinition = function (node, key, parent) {
@@ -177,7 +177,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
         return {
             result: result,
             mapper: mapper,
-            nullMapper: nullMapper
+            nullMapper: nullMapper,
         };
     };
     DartMappersVisitor.prototype.InputObjectTypeDefinition = function (node, key, parent) {
@@ -243,7 +243,7 @@ var DartMappersVisitor = /** @class */ (function (_super) {
             result: result,
             mapper: mapper,
             nullMapper: nullMapper,
-            mapperStatements: type.mapperStatements
+            mapperStatements: type.mapperStatements,
         };
     };
     DartMappersVisitor.prototype.EnumTypeDefinition = function (node) {

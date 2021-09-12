@@ -8,7 +8,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.plugin = void 0;
 var schema_ast_1 = require("@graphql-codegen/schema-ast");
 var graphql_1 = require("graphql");
@@ -27,7 +27,7 @@ var plugin = function (schema, documents, config) {
     }
     var result = {
         content: __spreadArray(__spreadArray([], visitorResult.definitions, true), mappersDefinitions, true).filter(Boolean)
-            .join('\n')
+            .join('\n'),
     };
     return result;
 };

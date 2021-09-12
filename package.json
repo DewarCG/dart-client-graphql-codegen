@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint **/*.ts",
     "test": "jest --no-watchman",
-    "build": "tsc"
+    "build": "tsc && rename 's/.js/.cjs/' dist/*.js"
   },
   "dependencies": {
     "@graphql-codegen/plugin-helpers": "^2.1.1",

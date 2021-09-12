@@ -1,15 +1,25 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "outDir": "dist",
-    "strict": false,
+    "baseUrl": ".",
     "rootDir": "src",
-    "lib": [
-      "esnext"
-    ],
+    "outDir": "dist",
     "esModuleInterop": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "ES5",
+    "suppressImplicitAnyIndexErrors": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "declaration": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noImplicitReturns": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": false,
   },
   "exclude": [
-    "tests"
+    "tests", "dist"
   ]
 }
