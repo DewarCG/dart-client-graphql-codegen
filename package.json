@@ -6,7 +6,6 @@
   "scripts": {
     "lint": "eslint **/*.ts",
     "test": "jest --no-watchman",
-    "prepack": "bob prepack",
     "build": "tsc"
   },
   "dependencies": {
