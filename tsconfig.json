@@ -1,26 +1,14 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": "src",
-    "outDir": "dist",
-    "esModuleInterop": true,
-    "module": "esnext",
-    "target": "es2018",
-    "lib": ["es6", "esnext", "es2015", "dom"],
-    "moduleResolution": "node",
-    "suppressImplicitAnyIndexErrors": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true,
+  "compilerOptions": { 
+    "target": "es6", 
+    "module": "commonjs",
+    "strict": false, 
     "declaration": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "noImplicitReturns": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "strict": false,
+    "outDir": "./dist"
   },
   "exclude": [
-    "tests", "dist"
+      "tests",
+      "dist",
+      "node_modules"
   ]
 }

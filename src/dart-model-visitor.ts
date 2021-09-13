@@ -3,7 +3,6 @@ import {
   indent,
   ParsedTypesConfig,
 } from '@graphql-codegen/visitor-plugin-common';
-import autoBind from 'auto-bind';
 import {
   EnumTypeDefinitionNode,
   EnumValueDefinitionNode,
@@ -31,8 +30,6 @@ export class DartModelVisitor<
     additionalConfig: Partial<TParsedConfig> = {}
   ) {
     super(schema, pluginConfig, {} as TParsedConfig);
-
-    autoBind(this);
   }
 
   override NonNullType(node: NonNullTypeNode): string {

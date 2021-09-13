@@ -1,10 +1,11 @@
-import { BaseTypesVisitor, indent, } from '@graphql-codegen/visitor-plugin-common';
-import autoBind from 'auto-bind';
-import { Kind, } from 'graphql';
-export class DartMappersVisitor extends BaseTypesVisitor {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DartMappersVisitor = void 0;
+const visitor_plugin_common_1 = require("@graphql-codegen/visitor-plugin-common");
+const graphql_1 = require("graphql");
+class DartMappersVisitor extends visitor_plugin_common_1.BaseTypesVisitor {
     constructor(schema, pluginConfig, additionalConfig = {}) {
         super(schema, pluginConfig, {});
-        autoBind(this);
     }
     NonNullType(node) {
         const type = node.type;
@@ -31,13 +32,13 @@ export class DartMappersVisitor extends BaseTypesVisitor {
                 toMap: [
                     `Map<String, dynamic>? {{field}};`,
                     `if (input.{{field}} != null) {`,
-                    indent(`{{field}} = ${type}Mapper().toMap(input.{{field}});`),
+                    (0, visitor_plugin_common_1.indent)(`{{field}} = ${type}Mapper().toMap(input.{{field}});`),
                     `}`,
                 ],
                 fromMap: [
                     `${type}? {{field}};`,
                     `if (map['{{field}}'] != null) {`,
-                    indent(`{{field}} = ${type}Mapper().fromMap(map['{{field}}']);`),
+                    (0, visitor_plugin_common_1.indent)(`{{field}} = ${type}Mapper().fromMap(map['{{field}}']);`),
                     `}`,
                 ],
             };
@@ -70,13 +71,13 @@ export class DartMappersVisitor extends BaseTypesVisitor {
                 fromMap: [
                     `List<${typeName}>? {{field}}List;`,
                     "if (map['{{field}}'] != null) {",
-                    indent(common),
+                    (0, visitor_plugin_common_1.indent)(common),
                     '}',
                 ],
                 toMap: [
                     `List<Map<String, dynamic>${mapOptional}>? {{field}}List;`,
                     'if (input.{{field}} != null) {',
-                    indent(common2),
+                    (0, visitor_plugin_common_1.indent)(common2),
                     '}',
                 ],
             };
@@ -102,18 +103,18 @@ export class DartMappersVisitor extends BaseTypesVisitor {
             let f = field;
             let mappings = f.nullMapper || f.mapper;
             if (mappings) {
-                additionalMappers = mappings.map((it) => indent(it, 2));
+                additionalMappers = mappings.map((it) => (0, visitor_plugin_common_1.indent)(it, 2));
             }
         }
         const result = [
             ...descriptions,
             `class ${inputName}Mapper {`,
-            indent(`${inputName} fromMap(Map<String, dynamic> map) {`),
+            (0, visitor_plugin_common_1.indent)(`${inputName} fromMap(Map<String, dynamic> map) {`),
             ...additionalMappers,
-            indent(`return ${inputName}(`, 2),
-            ...fields.map((it) => indent(it, 3)),
-            indent(`);`, 2),
-            indent('}'),
+            (0, visitor_plugin_common_1.indent)(`return ${inputName}(`, 2),
+            ...fields.map((it) => (0, visitor_plugin_common_1.indent)(it, 3)),
+            (0, visitor_plugin_common_1.indent)(`);`, 2),
+            (0, visitor_plugin_common_1.indent)('}'),
             '}',
         ].join('\n');
         return result;
@@ -122,7 +123,7 @@ export class DartMappersVisitor extends BaseTypesVisitor {
         const originalFieldNode = parent[key];
         let result = '';
         const name = node.name;
-        if (originalFieldNode.type.kind === Kind.LIST_TYPE) {
+        if (originalFieldNode.type.kind === graphql_1.Kind.LIST_TYPE) {
             result = `${name}: ${name}List,`;
         }
         else {
@@ -155,18 +156,18 @@ export class DartMappersVisitor extends BaseTypesVisitor {
             let f = field;
             let mappings = f.nullMapper || f.mapper;
             if (mappings) {
-                additionalMappers = additionalMappers.concat(mappings.map((it) => indent(it, 2)));
+                additionalMappers = additionalMappers.concat(mappings.map((it) => (0, visitor_plugin_common_1.indent)(it, 2)));
             }
         }
         const result = [
             ...descriptions,
             `class ${inputName}Mapper {`,
-            indent(`Map<String, dynamic> toMap(${inputName} input) {`),
+            (0, visitor_plugin_common_1.indent)(`Map<String, dynamic> toMap(${inputName} input) {`),
             ...additionalMappers,
-            indent(`return <String, dynamic>{`, 2),
-            ...fields.map((it) => indent(it, 3)),
-            indent(`};`, 2),
-            indent('}'),
+            (0, visitor_plugin_common_1.indent)(`return <String, dynamic>{`, 2),
+            ...fields.map((it) => (0, visitor_plugin_common_1.indent)(it, 3)),
+            (0, visitor_plugin_common_1.indent)(`};`, 2),
+            (0, visitor_plugin_common_1.indent)('}'),
             '}',
         ].join('\n');
         return result;
@@ -212,7 +213,7 @@ export class DartMappersVisitor extends BaseTypesVisitor {
             : [];
         const enumValues = node.values
             .map((it) => it.name.toLowerCase())
-            .map((it) => indent(it) + ',');
+            .map((it) => (0, visitor_plugin_common_1.indent)(it) + ',');
         const result = [
             ...descriptions,
             `enum ${enumName} {`,
@@ -245,4 +246,4 @@ export class DartMappersVisitor extends BaseTypesVisitor {
         return isPrimitive;
     }
 }
-//# sourceMappingURL=dart-mappers-visitor.js.map
+exports.DartMappersVisitor = DartMappersVisitor;

@@ -4,7 +4,6 @@ import {
   ParsedTypesConfig,
   transformComment,
 } from '@graphql-codegen/visitor-plugin-common';
-import autoBind from 'auto-bind';
 import {
   EnumTypeDefinitionNode,
   EnumValueDefinitionNode,
@@ -33,7 +32,6 @@ export class DartMappersVisitor<
   ) {
     super(schema, pluginConfig, {} as TParsedConfig);
 
-    autoBind(this);
   }
 
   override NonNullType(node: NonNullTypeNode): any {

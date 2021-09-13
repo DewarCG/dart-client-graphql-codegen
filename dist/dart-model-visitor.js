@@ -1,10 +1,11 @@
-import { BaseTypesVisitor, indent, } from '@graphql-codegen/visitor-plugin-common';
-import autoBind from 'auto-bind';
-import { Kind, } from 'graphql';
-export class DartModelVisitor extends BaseTypesVisitor {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DartModelVisitor = void 0;
+const visitor_plugin_common_1 = require("@graphql-codegen/visitor-plugin-common");
+const graphql_1 = require("graphql");
+class DartModelVisitor extends visitor_plugin_common_1.BaseTypesVisitor {
     constructor(schema, pluginConfig, additionalConfig = {}) {
         super(schema, pluginConfig, {});
-        autoBind(this);
     }
     NonNullType(node) {
         let result = node.type;
@@ -23,10 +24,10 @@ export class DartModelVisitor extends BaseTypesVisitor {
     FieldDefinition(node, key, parent) {
         const typeString = node.type;
         const originalFieldNode = parent[key];
-        const addOptionalSign = originalFieldNode.type.kind !== Kind.NON_NULL_TYPE;
+        const addOptionalSign = originalFieldNode.type.kind !== graphql_1.Kind.NON_NULL_TYPE;
         const comment = this.getFieldComment(node);
         const { type } = this.config.declarationKind;
-        const result = indent(`${typeString} ${node.name};`);
+        const result = (0, visitor_plugin_common_1.indent)(`${typeString} ${node.name};`);
         return result;
     }
     InputObjectTypeDefinition(node, key, parent) {
@@ -37,14 +38,14 @@ export class DartModelVisitor extends BaseTypesVisitor {
         for (const field of originalInputNode.fields) {
             let fieldWithThis = `this.${field.name.value}`;
             let finalConstructorField = '';
-            if (field.type.kind === Kind.NON_NULL_TYPE) {
+            if (field.type.kind === graphql_1.Kind.NON_NULL_TYPE) {
                 finalConstructorField = `required ${fieldWithThis}`;
             }
             else {
                 finalConstructorField = fieldWithThis;
             }
             finalConstructorField += ',';
-            constructorFields.push(indent(finalConstructorField, 2));
+            constructorFields.push((0, visitor_plugin_common_1.indent)(finalConstructorField, 2));
         }
         let descriptions = node.description
             ? this.buildDartDocs(node.description)
@@ -52,9 +53,9 @@ export class DartModelVisitor extends BaseTypesVisitor {
         const result = [
             ...descriptions,
             `class ${inputName} {`,
-            indent(`${inputName}({`),
+            (0, visitor_plugin_common_1.indent)(`${inputName}({`),
             ...constructorFields,
-            indent('});'),
+            (0, visitor_plugin_common_1.indent)('});'),
             fields,
             '}',
         ].join('\n');
@@ -70,7 +71,7 @@ export class DartModelVisitor extends BaseTypesVisitor {
             ? this.buildDartDocs(node.description)
             : [];
         let type = node.type;
-        const result = [...descriptions, indent(`${type} ${node.name};`)].join('\n');
+        const result = [...descriptions, (0, visitor_plugin_common_1.indent)(`${type} ${node.name};`)].join('\n');
         return result;
     }
     ObjectTypeDefinition(node, key, parent) {
@@ -81,14 +82,14 @@ export class DartModelVisitor extends BaseTypesVisitor {
         for (const field of originalInputNode.fields) {
             let fieldWithThis = `this.${field.name.value}`;
             let finalConstructorField = '';
-            if (field.type.kind === Kind.NON_NULL_TYPE) {
+            if (field.type.kind === graphql_1.Kind.NON_NULL_TYPE) {
                 finalConstructorField = `required ${fieldWithThis}`;
             }
             else {
                 finalConstructorField = fieldWithThis;
             }
             finalConstructorField += ',';
-            constructorFields.push(indent(finalConstructorField, 2));
+            constructorFields.push((0, visitor_plugin_common_1.indent)(finalConstructorField, 2));
         }
         let descriptions = node.description
             ? this.buildDartDocs(node.description)
@@ -96,9 +97,9 @@ export class DartModelVisitor extends BaseTypesVisitor {
         const result = [
             ...descriptions,
             `class ${inputName} {`,
-            indent(`${inputName}({`),
+            (0, visitor_plugin_common_1.indent)(`${inputName}({`),
             ...constructorFields,
-            indent('});'),
+            (0, visitor_plugin_common_1.indent)('});'),
             fields,
             '}',
         ].join('\n');
@@ -111,7 +112,7 @@ export class DartModelVisitor extends BaseTypesVisitor {
             : [];
         const enumValues = node.values
             .map((it) => it.name.toLowerCase())
-            .map((it) => indent(it) + ',');
+            .map((it) => (0, visitor_plugin_common_1.indent)(it) + ',');
         const result = [
             ...descriptions,
             `enum ${enumName} {`,
@@ -139,4 +140,4 @@ export class DartModelVisitor extends BaseTypesVisitor {
         }
     }
 }
-//# sourceMappingURL=dart-model-visitor.js.map
+exports.DartModelVisitor = DartModelVisitor;
