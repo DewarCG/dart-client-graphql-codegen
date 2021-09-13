@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "GraphQL Code Generator plugin for generating Dart types",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "lint": "eslint **/*.ts",
     "test": "jest --no-watchman",
