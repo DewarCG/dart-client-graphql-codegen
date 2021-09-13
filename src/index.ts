@@ -5,10 +5,10 @@ import { DartPluginConfig } from './config';
 import { DartMappersVisitor } from './dart-mappers-visitor';
 import { DartModelVisitor } from './dart-model-visitor';
 
-export const plugin: PluginFunction<
+const plugin: PluginFunction<
   DartPluginConfig,
   Types.ComplexPluginOutput
-> = (
+> = async (
   schema: GraphQLSchema,
   documents: Types.DocumentFile[],
   config: DartPluginConfig
@@ -35,3 +35,7 @@ export const plugin: PluginFunction<
   };
   return result;
 };
+
+module.exports = {
+  plugin
+}
